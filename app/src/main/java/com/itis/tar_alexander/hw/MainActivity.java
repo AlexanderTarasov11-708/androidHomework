@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when user tap the Button */
     public void edit(View view) {
-        Intent intent = new Intent(this, EditActivity.class);
+        Intent intent  = new Intent("com.itis.tar_alexander.EDIT");
+        // intent.putExtra("something", 2); // по желанию
         startActivity(intent);
     }
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         sendIntent.putExtra(Intent.EXTRA_TEXT, Name);
         sendIntent.setType("text/plain");
 
-// Verify that the intent will resolve to an activity
+        // Verify that the intent will resolve to an activity
         if (sendIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(sendIntent);
             Toast toast = Toast.makeText(getApplicationContext(),
