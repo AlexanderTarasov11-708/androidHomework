@@ -4,39 +4,44 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
-public class EditActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity implements View.OnClickListener {
+
+    EditText editName;
+    EditText editMail;
+    EditText editPhone;
+    Button btnOK;
+    Button btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        editName = (EditText) findViewById(R.id.name_edit);
+        editMail = (EditText) findViewById(R.id.mail_edit);
+        editPhone = (EditText) findViewById(R.id.phone_edit);
+        btnOK = (Button) findViewById(R.id.btn_ok);
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
+        btnOK.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
     }
 
-    /** Called when the user taps Accept button */
-    public void accept(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-
-        EditText editName = (EditText) findViewById(R.id.editName);
-        String message1 = editName.getText().toString();
-        intent.putExtra(MainActivity.USER_NAME, message1);
-
-        EditText editMail = (EditText) findViewById(R.id.editMail);
-        String message2 = editMail.getText().toString();
-        intent.putExtra(MainActivity.USER_MAIL, message2);
-
-        EditText editPhone = (EditText) findViewById(R.id.editPhone);
-        String message3 = editPhone.getText().toString();
-        intent.putExtra(MainActivity.USER_PHONE, message3);
-
-        startActivity(intent);
-    }
-
-    /** Called when user tap Cancel button */
-    public void cancel(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(MainActivity.FLAG,0);
-        startActivity(intent);
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.btn_ok:
+                intent.putExtra("name", editName.getText().toString());
+                intent.putExtra("mail", editMail.getText().toString());
+                intent.putExtra("phone", editPhone.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
+            case  R.id.btn_cancel:
+                setResult(RESULT_CANCELED);
+                finish();
+        }
     }
 }
