@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     AlarmManager am;
     int hour;
     int minute;
-    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +77,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         am.set(AlarmManager.RTC_WAKEUP,
                 newCal.getTimeInMillis(),
                 pendingIntent);
-        toast = Toast.makeText(this, "Будильник запущен!", Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(this, "Будильник запущен!", Toast.LENGTH_SHORT).show();
     }
 
     public void stopNotify() {
@@ -87,8 +85,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
                 intent, PendingIntent.FLAG_CANCEL_CURRENT);
         am.cancel(pendingIntent);
-        toast = Toast.makeText(this, "Будильник отменен!", Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(this, "Будильник отменен!", Toast.LENGTH_SHORT).show();
     }
 }
 
